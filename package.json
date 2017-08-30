@@ -26,13 +26,11 @@
   "dependencies": {
     "glamor": "^2.20.40",
     "glamorous": "^4.5.0",
+    "prop-types": "^15.5.10",
     "radium": "^0.19.4",
     "react": "^15.6.1",
     "react-addons-perf": "^15.4.2",
     "react-dom": "^15.6.1",
-    "react-redux": "^5.0.6",
-    "redux": "^3.7.2",
-    "reselect": "^3.0.1",
     "styled-components": "^2.1.2"
   },
   "devDependencies": {
