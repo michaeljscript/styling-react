@@ -3,7 +3,7 @@ const lighthouse = require('lighthouse');
 const path = require('path');
 const fs = require('fs');
 
-const PROJECT_TEST = process.env.CHROME_PAINT_TEST || 'css';
+const PROJECT_TEST = process.env.CHROME_PAINT_TEST || 'index';
 
 // https://github.com/GoogleChrome/lighthouse/blob/HEAD/docs/readme.md#using-programmatically
 // launch chrome audit

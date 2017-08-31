@@ -6,10 +6,6 @@ import propTypes from 'prop-types';
  */
 export default class Timer extends Component {
 
-    static propTypes = {
-        onRenderFinished: propTypes.func
-    };
-
     constructor(...args) {
         super(...args);
         this.state = { startTime: null };

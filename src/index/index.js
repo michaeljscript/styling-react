@@ -1,11 +1,11 @@
 import { render } from 'react-dom';
 import React, { Component } from 'react';
-
+import { Button, Input, Title, Label } from '../radium/components';
 import Timer from './utils/Timer';
-import { Button, Input, Title, Label } from './inline/components';
 
 
 const handleRenderFinished = ({ renderTime }) => document.location.href += ',' + renderTime;
+
 
 const renderTable = (lines = 10) => {
     const els = [];
@@ -34,10 +34,4 @@ const REPEAT_TIMES = 15;
 window.render = render;
 window.renderTable = renderTable;
 
-
-if (document.location.href.split(',').length < REPEAT_TIMES + 1) {
-    render(
-        renderTable(tableSize),
-        document.getElementById('app')
-    );
-}
+render(renderTable(tableSize), document.getElementById('app'));
