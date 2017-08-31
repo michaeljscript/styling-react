@@ -2,11 +2,13 @@ import { render } from 'react-dom';
 import React, { Component } from 'react';
 import Timer from './Timer';
 
+const measureTime = /[\?\&]measure_render_time/.test(document.location.search);
+
 export default ({ Button, Input, Title, Label }) => {
 
     const handleRenderFinished = ({ renderTime }) => {
 
-        if (/[\?\&]measure_render_time/.test(document.location.search)) {
+        if (measureTime) {
             document.location.hash += ',' + renderTime;
             document.location.reload();
         }
@@ -40,5 +42,11 @@ export default ({ Button, Input, Title, Label }) => {
     window.render = render;
     window.renderTable = renderTable;
 
-    render(renderTable(TABLE_SIZE), document.getElementById('app'));
+    if (document.location.hash.split(',').length <= REPEAT_TIMES) {
+        render(renderTable(TABLE_SIZE), document.getElementById('app'));
+    } else if (measureTime) {
+        const getResults = () => window.location.hash.split(',').filter(a => !a.startsWith('#')).join(', ');
+        const handleClick = () => prompt("Copy results", getResults());
+        render(<button onClick={handleClick}>Copy results</button>, document.getElementById('app'));
+    }
 }
