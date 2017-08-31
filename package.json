@@ -13,7 +13,8 @@
     "test:chrome": "node ./src/chrome-paint-test",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "watch:build": "webpack --watch"
+    "watch:build": "webpack --watch",
+    "build:packages": "cross-env BUILD_TYPE=\"packages\" npm run build"
   },
   "repository": {
     "type": "git",
@@ -23,7 +24,8 @@
     "react",
     "styles",
     "performance"
-  ],  "author": "Michal Szorád",
+  ],
+  "author": "Michal Szorád",
   "license": "ISC",
   "dependencies": {
     "glamor": "^2.20.40",

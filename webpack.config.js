@@ -7,27 +7,48 @@ const webpack = require('webpack');
 const path = require('path');
 const fs = require('fs');
 
+// option - will create a production build for packages
+const buildPackages = process.env.BUILD_TYPE === 'packages';
+
 const createEntries = (names) => {
     const result = {};
     names.forEach(name => result[name] = path.join(__dirname, 'src', name, 'index.js'));
     return result;
 };
 
-const entries = {
-    ...createEntries(['styled-components', 'glamorous', 'radium', 'sass', 'css']),
+const getEntries = () => {
+    if (buildPackages) {
+        return {
+            ['styled-components']: './src/simple/styled-components.js',
+            css: './src/simple/css.js',
+            radium: './src/simple/radium.js',
+            sass: './src/simple/sass.js',
+            glamorous: './src/simple/glamorous.js',
+        }
+    }
+
+    return createEntries(['styled-components', 'glamorous', 'radium', 'sass', 'css']);
 };
 
-const output = {
-    path: path.join(__dirname, "./src/"),
-    filename: "./[name]/build.min.js"
-};
+const getOutput = () => {
+    if (buildPackages) {
+        return {
+            path: path.join(__dirname, "./src/"),
+            filename: './simple/simple.[name].build.min.js'
+        }
+    }
 
+    return {
+        path: path.join(__dirname, "./src/"),
+        filename: "./[name]/build.min.js"
+    };
+};
 
 module.exports = {
     context: __dirname,
     devtool: false,
-    entry: entries,
-    output,
+    entry: getEntries(),
+    output: getOutput(),
     module: {
         loaders: [
             {
