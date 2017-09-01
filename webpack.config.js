@@ -19,7 +19,7 @@ const createEntries = (names) => {
 const getEntries = () => {
     if (buildPackages) {
         return {
-            ['styled-components']: './src/simple/styled-components.js',
+            'styled-components': './src/simple/styled-components.js',
             css: './src/simple/css.js',
             radium: './src/simple/radium.js',
             sass: './src/simple/sass.js',
@@ -27,20 +27,20 @@ const getEntries = () => {
         }
     }
 
-    return createEntries(['styled-components', 'glamorous', 'radium', 'sass', 'css']);
+    return createEntries(['styled-components', 'glamorous', 'radium', 'sass', 'css', 'inline']);
 };
 
 const getOutput = () => {
     if (buildPackages) {
         return {
-            path: path.join(__dirname, "./src/"),
+            path: path.join(__dirname, './src/'),
             filename: './simple/simple.[name].build.min.js'
         }
     }
 
     return {
-        path: path.join(__dirname, "./src/"),
-        filename: "./[name]/build.min.js"
+        path: path.join(__dirname, './src/'),
+        filename: './[name]/build.min.js'
     };
 };
 

@@ -3,10 +3,10 @@ const lighthouse = require('lighthouse');
 const path = require('path');
 const fs = require('fs');
 
-const PROJECT_TEST = process.env.CHROME_PAINT_TEST || 'index';
+const PROJECT_TEST = process.env.CHROME_PAINT_TEST || 'css';
+const startTimeStr = new Date().toLocaleTimeString().replace(/:/g, '-');
 
-// https://github.com/GoogleChrome/lighthouse/blob/HEAD/docs/readme.md#using-programmatically
-// launch chrome audit
+// launch chrome audit https://github.com/GoogleChrome/lighthouse/blob/HEAD/docs/readme.md#using-programmatically
 const launchChromeAndRunLighthouse = (url, flags = {}, config = null) => {
     return chromeLauncher.launch().then(chrome => {
         flags.port = chrome.port;
@@ -16,10 +16,15 @@ const launchChromeAndRunLighthouse = (url, flags = {}, config = null) => {
 
 const URL = `file:///${path.join(__dirname, PROJECT_TEST, 'index.html')}`;
 const OUTPUT_DIRECTORY = path.join(__dirname, '..', 'results');
+const RESULT_FILE = path.join(OUTPUT_DIRECTORY, `audit_${startTimeStr}_result.json`);
 
 
 // write aggregated results into file audit_results.json
-const finishTest = (results) => fs.writeFileSync(path.join(OUTPUT_DIRECTORY, 'audit_result.json'), JSON.stringify(results));
+const finishTest = (results) => {
+    fs.writeFileSync(RESULT_FILE, JSON.stringify(results));
+    console.log('[TEST] FINISHED.');
+    console.log(`[TEST] Results can be found here ${RESULT_FILE}`);
+}
 
 // launch chrome performance test on a website
 const launchTests = (url, times = 10, resultsMs = []) => new Promise((resolve, reject) => {
@@ -48,12 +53,14 @@ const launchTests = (url, times = 10, resultsMs = []) => new Promise((resolve, r
         const time = new Date();
 
         console.log(`[TEST] finished at ${time.toLocaleTimeString()} with the evaluation time ${paint.displayValue}`);
-
-        // save audit result
-        fs.writeFileSync(path.join(OUTPUT_DIRECTORY, `audit_${time.getTime()}.json`), JSON.stringify(audits['first-meaningful-paint']));
         return paint;
+    }).then(paint => {
+        if (times - 1 > 0) {
+            return launchTests(url, times - 1, [...resultsMs, paint.displayValue]);
+        }
 
-    }).then(paint => times - 1 > 0 ? launchTests(url, times - 1, [...resultsMs, paint.displayValue]) : finishTest([...resultsMs, paint.displayValue]));
+        return finishTest([...resultsMs, paint.displayValue]);
+    });
 });
 
 

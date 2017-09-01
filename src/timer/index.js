@@ -3,13 +3,19 @@ import React, { Component } from 'react';
 import Timer from './Timer';
 
 const measureTime = /[\?\&]measure_render_time/.test(document.location.search);
+const inputRepeatTimes = /[\?\&]repeat_times=([0-9]+)/.exec(document.location.search);
+const inputTableSize = /[\?\&]table_size=([0-9]+)/.exec(document.location.search);
+
+const addRecord = (record) => document.location.hash += ',' + record;
+const loadRecords = () => window.location.hash.split(',').filter(a => !a.startsWith('#')).map(Number);
+
 
 export default ({ Button, Input, Title, Label }) => {
 
     const handleRenderFinished = ({ renderTime }) => {
 
         if (measureTime) {
-            document.location.hash += ',' + renderTime;
+            addRecord(renderTime);
             document.location.reload();
         }
     }
@@ -33,20 +39,17 @@ export default ({ Button, Input, Title, Label }) => {
                     {els}
                 </tbody>
             </table>
-        </Timer>
+        </Timer>;
     };
 
-    const TABLE_SIZE = 10000;
-    const REPEAT_TIMES = 100;
+    const TABLE_SIZE = inputTableSize && inputTableSize[1] || 10000;
+    const REPEAT_TIMES = inputRepeatTimes && inputRepeatTimes[1] || 100;
 
-    window.render = render;
-    window.renderTable = renderTable;
 
-    if (document.location.hash.split(',').length <= REPEAT_TIMES) {
+    if (loadRecords().length <= REPEAT_TIMES) {
         render(renderTable(TABLE_SIZE), document.getElementById('app'));
     } else if (measureTime) {
-        const getResults = () => window.location.hash.split(',').filter(a => !a.startsWith('#')).join(', ');
-        const handleClick = () => prompt("Copy results", getResults());
+        const handleClick = () => prompt("Copy results", loadRecords().join(', '));
         render(<button onClick={handleClick}>Copy results</button>, document.getElementById('app'));
     }
 }
