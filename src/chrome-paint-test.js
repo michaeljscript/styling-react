@@ -14,6 +14,7 @@ const launchChromeAndRunLighthouse = (url, flags = {}, config = null) => {
     });
 }
 
+// will launch chrome at this url
 const URL = `file:///${path.join(__dirname, PROJECT_TEST, 'index.html')}`;
 const OUTPUT_DIRECTORY = path.join(__dirname, '..', 'results');
 const RESULT_FILE = path.join(OUTPUT_DIRECTORY, `audit_${startTimeStr}_result.json`);
