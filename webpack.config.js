@@ -44,23 +44,48 @@ const getOutput = () => {
     };
 };
 
+const getQuery = () => {
+    if (buildPackages) {
+        return {};
+    }
+
+    return {
+        presets: ['babel-preset-react', 'babel-preset-es2015'].map(require.resolve),
+        plugins: [
+            'babel-plugin-transform-es2015-destructuring',
+            'babel-plugin-transform-object-rest-spread'
+        ].map(require.resolve),
+    };
+}
+
+const getExternals = () => {
+    if (buildPackages) {
+        return [
+            {
+                "react": {
+                    root: "React",
+                    commonjs2: "react",
+                    commonjs: "react",
+                    amd: "react"
+                }
+            }
+        ];
+    }
+    return [];
+}
+
 module.exports = {
     context: __dirname,
     devtool: false,
     entry: getEntries(),
     output: getOutput(),
+    externals: getExternals(),
     module: {
         loaders: [
             {
                 test: /(\.js|\.jsx)$/,
                 loader: 'babel-loader',
-                query: {
-                    presets: ['babel-preset-react', 'babel-preset-es2015'].map(require.resolve),
-                    plugins: [
-                        'babel-plugin-transform-es2015-destructuring',
-                        'babel-plugin-transform-object-rest-spread'
-                    ].map(require.resolve),
-                }
+                query: getQuery()
             },
             {
                 test: /\.scss$/,
@@ -73,26 +98,16 @@ module.exports = {
         ]
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            inject: true,
-            minify: {
-                removeComments: true,
-                collapseWhitespace: true,
-                removeRedundantAttributes: true,
-                useShortDoctype: true,
-                removeEmptyAttributes: true,
-                removeStyleLinkTypeAttributes: true,
-                keepClosingSlash: true,
-                minifyJS: true,
-                minifyCSS: true,
-                minifyURLs: true,
-            },
+        new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            }
         }),
         new webpack.DefinePlugin({
             'process.env': {
                 NODE_ENV: JSON.stringify('production')
             }
         }),
-        new UglifyJSPlugin()
     ],
 };
