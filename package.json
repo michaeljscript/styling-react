@@ -13,8 +13,7 @@
     "test:chrome": "node ./src/chrome-paint-test",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "watch:build": "webpack --watch",
-    "build:packages": "webpack --config webpack.packages.config.js"
+    "watch:build": "webpack --watch"
   },
   "repository": {
     "type": "git",
