@@ -1,41 +1,39 @@
 // production webpack config file
+process.env.NODE_ENV = '"production"';
 
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
-const fs = require('fs');
-
-// option - will create a production build for packages
-const buildPackages = process.env.BUILD_TYPE === 'packages';
-
-const createEntries = (names) => {
-    const result = {};
-    names.forEach(name => result[name] = path.join(__dirname, 'src', name, 'index.js'));
-    return result;
-};
 
 module.exports = {
     context: __dirname,
     devtool: false,
-    entry: createEntries(['styled-components', 'glamorous', 'radium', 'sass', 'css', 'inline']),
+    entry: {
+        'styled-components': './src/simple/styled-components.js',
+        css: './src/simple/css.js',
+        radium: './src/simple/radium.js',
+        sass: './src/simple/sass.js',
+        glamorous: './src/simple/glamorous.js',
+    },
     output: {
         path: path.join(__dirname, './src/'),
-        filename: './[name]/build.min.js'
+        filename: './simple/simple.[name].build.min.js'
     },
-    externals: [],
+    externals: [
+        {
+            "react": {
+                root: "React",
+                commonjs2: "react",
+                commonjs: "react",
+                amd: "react"
+            }
+        }
+    ],
     module: {
         loaders: [
             {
                 test: /(\.js|\.jsx)$/,
                 loader: 'babel-loader',
-                query: {
-                    presets: ['babel-preset-react', 'babel-preset-es2015'].map(require.resolve),
-                    plugins: [
-                        'babel-plugin-transform-es2015-destructuring',
-                        'babel-plugin-transform-object-rest-spread'
-                    ].map(require.resolve)
-                }
+                query: {}
             },
             {
                 test: /\.scss$/,
