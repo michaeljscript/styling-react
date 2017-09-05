@@ -53,7 +53,7 @@ const launchTests = (url, times = 10, resultsMs = []) => new Promise((resolve, r
         const paint = audits['first-meaningful-paint'];
         const time = new Date();
 
-        console.log(`[TEST] finished at ${time.toLocaleTimeString()} with the evaluation time ${paint.displayValue}`);
+        console.log(`[TEST] [${times}] finished at ${time.toLocaleTimeString()} with the evaluation time ${paint.displayValue}`);
         return paint;
     }).then(paint => {
         if (times - 1 > 0) {
