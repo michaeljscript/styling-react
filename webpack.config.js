@@ -1,13 +1,5 @@
-// production webpack config file
-
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
-const fs = require('fs');
-
-// option - will create a production build for packages
-const buildPackages = process.env.BUILD_TYPE === 'packages';
 
 const createEntries = (names) => {
     const result = {};

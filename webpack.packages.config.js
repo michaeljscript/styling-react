@@ -1,19 +1,16 @@
-// production webpack config file
-process.env.NODE_ENV = '"production"';
-
 const webpack = require('webpack');
 const path = require('path');
+
+const createEntries = (names) => {
+    const result = {};
+    names.forEach(name => result[name] = `./src/simple/${name}.js`);
+    return result;
+}
 
 module.exports = {
     context: __dirname,
     devtool: false,
-    entry: {
-        'styled-components': './src/simple/styled-components.js',
-        css: './src/simple/css.js',
-        radium: './src/simple/radium.js',
-        sass: './src/simple/sass.js',
-        glamorous: './src/simple/glamorous.js',
-    },
+    entry: createEntries(['styled-components', 'css', 'radium', 'sass', 'glamorous']),
     output: {
         path: path.join(__dirname, './src/'),
         filename: './simple/simple.[name].build.min.js'
