@@ -46,7 +46,7 @@ export default ({ Button, Input, Title, Label }) => {
     const REPEAT_TIMES = inputRepeatTimes && inputRepeatTimes[1] || 100;
 
 
-    if (loadRecords().length <= REPEAT_TIMES) {
+    if (loadRecords().length < REPEAT_TIMES) {
         render(renderTable(TABLE_SIZE), document.getElementById('app'));
     } else if (measureTime) {
         const handleClick = () => prompt("Copy results", loadRecords().join(', '));
