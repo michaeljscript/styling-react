@@ -10,8 +10,6 @@ in the main directory you can run
 ### `npm run build`
 to create a production builds for app testing packages
 
-### `npm run build:packages`
-to create a production build only for packages
 
 ### `npm run test:chrome:*package_name*`
 instead of _\*package_name\*_ you can write any of: _css, sass, inline, styled-components, glamorous and radium_
