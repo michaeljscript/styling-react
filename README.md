@@ -1,12 +1,12 @@
-# styling-react
+# The performance of styled React components
 Performance tests of some styling packages for React.
 
 You can read about the perofrmance tests at http://@todo/.
 
 The following libraries were tested: styled-components, glamorous, radium and css, sass and inline styles.
 
-## awailable scripts
-In the main directory you can run following scripts
+## Awailable scripts
+In the main directory you can run following scripts.
 
 ### `npm run build`
 To create a production builds for app testing packages.
@@ -28,10 +28,12 @@ When the test finishes you can see the results in the directory `./results`.
 ## React scripting time test
  - Measures the time between `componentWillMount` and `componentDidMount`
 
- 
+
 To run this test you need to create the build, `npm run build` and open index.html file from the `./src/*package*` directory.
 Add "?measure\_render\_time" into the url to start the test.
+
 A copy button will appear after the test finishes.
 
 You can also use parameter table\_size and repeat\_times.
+
 Example: ?table\_size=5&repeat\_times=5&measure\_render\_time
