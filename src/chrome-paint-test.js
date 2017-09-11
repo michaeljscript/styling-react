@@ -15,7 +15,7 @@ const log = (...args) => console.log(`[TEST]`, ...args);
 // make sure library name is passed
 if (!LIBRARY) {
     log(`You need to pass argument library to test a specific library.
-    Example: npm run test:chrome -- --library=glamorous
+    Example: npm run test:paint -- --library=glamorous
     Other libraries you can test: css, glamorous, inline, radium, sass, styled-components`);
     process.exit(0);
 }
