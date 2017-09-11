@@ -18,6 +18,8 @@ This test will run 100 times and may take a long time.
 
 You can also use an option `--repeat-times=50` to run the tests 50 times. By default the test will run 100 times.
 
+If you are receiving error `ERR_FILE_NOT_FOUND` make sure you have created your builds and not misspeled the library name.
+
 ## render tests
 To test render time of the packages you need to create the build,
 `npm run build` and open index.html file from the `src/*package*` directory. Add "?measure\_render\_time" into the url to start the test. A copy button will appear after the test finishes. 
