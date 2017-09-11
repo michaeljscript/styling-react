@@ -9,6 +9,9 @@ const argv = require('yargs').argv;
 const REPEAT_TIMES = argv['repeat-times'] || 100; // the amount of times the test will be repeated
 const LIBRARY = argv['library']; // name of the library
 
+// custom log messages
+const log = (...args) => console.log(`[TEST]`, ...args);
+
 // make sure library name is passed
 if (!LIBRARY) {
     log(`You need to pass argument library to test a specific library.
@@ -20,7 +23,6 @@ if (!LIBRARY) {
 // test start time - replaced forbidden characters
 const startTimeStr = new Date().toLocaleString().replace(/:/g, '-');
 
-const log = (...args) => console.log(`[TEST]`, ...args);
 
 // will launch chrome at this url
 const URL = `file:///${path.join(__dirname, LIBRARY, 'index.html')}`;
