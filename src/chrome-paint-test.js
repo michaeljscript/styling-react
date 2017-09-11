@@ -9,11 +9,6 @@ const argv = require('yargs').argv;
 const REPEAT_TIMES = argv['repeat-times'] || 100; // the amount of times the test will be repeated
 const LIBRARY = argv['library']; // name of the library
 
-// test start time - replaced forbidden characters
-const startTimeStr = new Date().toLocaleString().replace(/:/g, '-');
-
-const log = (...args) => console.log(`[TEST]`, ...args);
-
 // make sure library name is passed
 if (!LIBRARY) {
     log(`You need to pass argument library to test a specific library.
@@ -21,6 +16,11 @@ if (!LIBRARY) {
     Other libraries you can test: css, glamorous, inline, radium, sass, styled-components`);
     process.exit(0);
 }
+
+// test start time - replaced forbidden characters
+const startTimeStr = new Date().toLocaleString().replace(/:/g, '-');
+
+const log = (...args) => console.log(`[TEST]`, ...args);
 
 // will launch chrome at this url
 const URL = `file:///${path.join(__dirname, LIBRARY, 'index.html')}`;
@@ -35,8 +35,8 @@ const launchTests = async ({ url, times = 10, outputFile = './results.json' } = 
 
     log('launching chrome instance');
     const chrome = await chromeLauncher.launch();
+    
     // disable defaults slowing down the device
-
     const flags = {
         disableNetworkThrottling: true,
         disableCpuThrottling: true,

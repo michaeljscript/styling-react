@@ -2,7 +2,6 @@
 Performance test of some styling packages for react.
 
 You can read about the perofrmance issues of the styling libraries at http://@todo/.
-All tests on this page have been made on chrome (v 60)
 
 ## awailable scripts
 in the main directory you can run
@@ -14,7 +13,6 @@ to create a production builds for app testing packages
 ### `npm run test:chrome -- --library=*library_name*`
 instead of _\*library_name\*_ you can write any of: _css, sass, inline, styled-components, glamorous and radium_
 to start a first meaningful paint test using chrome and lighthouse.
-This test will run 100 times and may take a long time.
 
 You can also use an option `--repeat-times=50` to run the tests 50 times. By default the test will run 100 times.
 

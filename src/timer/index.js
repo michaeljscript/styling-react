@@ -1,5 +1,5 @@
-import { render } from 'react-dom';
 import React, { Component } from 'react';
+import { render } from 'react-dom';
 import Timer from './Timer';
 
 const measureTime = /[\?\&]measure_render_time/.test(document.location.search);
