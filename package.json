@@ -4,12 +4,6 @@
   "description": "Performance tests of some styling packages for react.",
   "main": "index.js",
   "scripts": {
-    "test:chrome:css": "cross-env CHROME_PAINT_TEST=\"css\" npm run test:chrome",
-    "test:chrome:glamorous": "cross-env CHROME_PAINT_TEST=\"glamorous\" npm run test:chrome",
-    "test:chrome:inline": "cross-env CHROME_PAINT_TEST=\"inline\" npm run test:chrome",
-    "test:chrome:radium": "cross-env CHROME_PAINT_TEST=\"radium\" npm run test:chrome",
-    "test:chrome:sass": "cross-env CHROME_PAINT_TEST=\"sass\" npm run test:chrome",
-    "test:chrome:styled-components": "cross-env CHROME_PAINT_TEST=\"styled-components\" npm run test:chrome",
     "test:chrome": "node ./src/chrome-paint-test",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
@@ -37,7 +31,8 @@
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "reselect": "^3.0.1",
-    "styled-components": "^2.1.2"
+    "styled-components": "^2.1.2",
+    "yargs": "^8.0.2"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

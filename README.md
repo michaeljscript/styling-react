@@ -11,10 +11,12 @@ in the main directory you can run
 to create a production builds for app testing packages
 
 
-### `npm run test:chrome:*package_name*`
-instead of _\*package_name\*_ you can write any of: _css, sass, inline, styled-components, glamorous and radium_
+### `npm run test:chrome -- --library=*library_name*`
+instead of _\*library_name\*_ you can write any of: _css, sass, inline, styled-components, glamorous and radium_
 to start a first meaningful paint test using chrome and lighthouse.
 This test will run 100 times and may take a long time.
+
+You can also use an option `--repeat-times=50` to run the tests 50 times. By default the test will run 100 times.
 
 ## render tests
 To test render time of the packages you need to create the build,
