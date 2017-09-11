@@ -4,7 +4,7 @@
   "description": "Performance tests of some styling packages for react.",
   "main": "index.js",
   "scripts": {
-    "test:chrome": "node ./src/chrome-paint-test",
+    "test:paint": "node ./src/chrome-paint-test",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
     "watch:build": "webpack --watch"
