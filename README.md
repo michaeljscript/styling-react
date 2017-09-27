@@ -6,7 +6,7 @@ You can read about the perofrmance tests at http://@todo/.
 The following libraries were tested: styled-components, glamorous, radium and css, sass and inline styles.
 
 ## Awailable scripts
-In the main directory you can run following scripts.
+In the main directory you can run following scripts. Make sure you run `npm install` after cloning this repository.
 
 ### `npm run build`
 To create a production builds for app testing packages.
