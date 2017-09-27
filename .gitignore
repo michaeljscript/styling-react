@@ -60,8 +60,6 @@ typings/
 # idea files
 .idea
 
-# test results
-results
 
 # minified files
 *.min.js
