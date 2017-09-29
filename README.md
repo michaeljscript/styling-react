@@ -1,7 +1,7 @@
 # The performance of styled React components
 Performance tests of some styling packages for React.
 
-You can read about the perofrmance tests at http://@todo/.
+You can read about the perofrmance tests at http://blog.primehammer.com/2017/09/27/the-performance-of-styled-react-components/.
 
 The following libraries were tested: styled-components, glamorous, radium and css, sass and inline styles.
 
